@@ -17,6 +17,11 @@ class Player {
 
   // Handle Input and Logic
   void update() {
+    updateInput();
+    move();
+  }
+
+  void updateInput() {
     if (isKeyDown(KeyboardKey.w)) {
       position = Vector2(position.x, position.y - speed);
     }
@@ -29,6 +34,9 @@ class Player {
     if (isKeyDown(KeyboardKey.d)) {
       position = Vector2(position.x + speed, position.y);
     }
+  }
+
+  void move() {
     // Boundary Clamping (X-axis)
     if (position.x < radius) {
       position = Vector2(radius, position.y);
