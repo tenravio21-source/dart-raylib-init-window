@@ -1,18 +1,10 @@
+import 'package:game/configs/configs.dart' show Configs;
 import 'package:raylib/raylib.dart';
 
 void main() {
-  initLibrary(
-    windows: 'raylib/lib/raylib.dll',
-  );
+  initLibrary(windows: Configs.libraryPath);
 
-  const screenWidth = 800;
-  const screenHeight = 450;
-
-  initWindow(
-    screenWidth,
-    screenHeight,
-    'dart-raylib [core] example - basic window',
-  );
+  initWindow(Configs.screenWidth, Configs.screenHeight, Configs.title);
 
   setTargetFPS(60);
 
