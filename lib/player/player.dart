@@ -1,3 +1,4 @@
+import 'package:game/configs/configs.dart' show Configs;
 import 'package:raylib/raylib.dart';
 
 class Player {
@@ -27,6 +28,19 @@ class Player {
     }
     if (isKeyDown(KeyboardKey.d)) {
       position = Vector2(position.x + speed, position.y);
+    }
+    // Boundary Clamping (X-axis)
+    if (position.x < radius) {
+      position = Vector2(radius, position.y);
+    } else if (position.x > Configs.screenWidth - radius) {
+      position = Vector2(Configs.screenWidth - radius, position.y);
+    }
+
+    // Boundary Clamping (Y-axis)
+    if (position.y < radius) {
+      position = Vector2(position.x, radius);
+    } else if (position.y > Configs.screenHeight - radius) {
+      position = Vector2(position.x, Configs.screenHeight - radius);
     }
   }
 
