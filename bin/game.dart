@@ -11,7 +11,6 @@ void main() {
   while (!windowShouldClose()) {
     beginDrawing();
     clearBackground(Color.rayWhite);
-
     endDrawing();
   }
 
