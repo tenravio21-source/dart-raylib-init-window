@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:game/configs/configs.dart' show Configs;
 import 'package:raylib/raylib.dart';
 
@@ -22,17 +24,26 @@ class Player {
   }
 
   void updateInput() {
-    if (isKeyDown(KeyboardKey.w)) {
-      position = Vector2(position.x, position.y - speed);
-    }
-    if (isKeyDown(KeyboardKey.s)) {
-      position = Vector2(position.x, position.y + speed);
-    }
-    if (isKeyDown(KeyboardKey.a)) {
-      position = Vector2(position.x - speed, position.y);
-    }
-    if (isKeyDown(KeyboardKey.d)) {
-      position = Vector2(position.x + speed, position.y);
+    double dx = 0;
+    double dy = 0;
+
+    // 1. Capture Directional Intent
+    if (isKeyDown(KeyboardKey.w)) dy -= 1;
+    if (isKeyDown(KeyboardKey.s)) dy += 1;
+    if (isKeyDown(KeyboardKey.a)) dx -= 1;
+    if (isKeyDown(KeyboardKey.d)) dx += 1;
+
+    // 2. Only calculate if there is movement
+    if (dx != 0 || dy != 0) {
+      // Calculate magnitude: sqrt(x² + y²)
+      double length = math.sqrt((dx * dx) + (dy * dy));
+
+      // 3. Normalize and Apply Speed
+      // (Direction / Length) * Speed
+      position = Vector2(
+        position.x + (dx / length) * speed,
+        position.y + (dy / length) * speed,
+      );
     }
   }
 
